@@ -1,11 +1,23 @@
+import MealsGrid from "@/components/meals/meals-grid"
 import Link from "next/link"
-
-const Meals = () => {
+import classes from "./page.module.css"
+import { getMeals } from "@/lib/dbUtils"
+const Meals = async () => {
+  const meals = await getMeals()
   return (
     <>
-        <h1>Meals</h1>
-        <Link href="/meals/share">Share</Link>
-        <Link href="/meals/meal-1">Meal 1</Link>
+      <header className={classes.header}>
+        <h1>
+          Delicious meals created{` `}
+          <span className={classes.highlight}>by you</span>
+        </h1>
+        <p>
+          Choose your favourite recipe and cook it yourself, It is fun and easy!
+        </p>
+      </header>
+      <main className={classes.main}>
+        <MealsGrid meals={meals}/>
+      </main>
     </>
   )
 }
